@@ -1,5 +1,5 @@
 - name: Set admin password
-  hosts: my-firewall
+  hosts: vi-sky-pa1.aws.modeln.com
   connection: local
   gather_facts: False
 
@@ -7,7 +7,7 @@
     - role: PaloAltoNetworks.paloaltonetworks
 
   vars:
-    ip_to_register: "10.10.10.10"
+    ip_to_register: "172.31.254.13"
     tag_names: ["workday3", "office3", "box3"]
     dag_name: "dag-6"
     dag_match_filter: "'workday3' and 'box3'"
