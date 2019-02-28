@@ -11,9 +11,9 @@
   
   - name: Create static address group"
      panos_address_group:{
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
+      ip_address: "{{ ip_address }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
       name: Prod-Instances
       static_value:
        - Test-1.1.1.1
