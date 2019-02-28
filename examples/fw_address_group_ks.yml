@@ -22,20 +22,4 @@
       tag:
        - Prod
      }
-  - name: Create dynamic address group
-     panos_address_group:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
-      name: SI-Web-EPG
-      dynamic_value: SI-Web-EPG
-      tag:
-       - SI
-  - name: Delete address group
-     panos_address_group:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
-    
-  - name: Old-Prod-Instances
-     state: absent
+  
