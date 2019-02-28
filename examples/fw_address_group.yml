@@ -9,7 +9,7 @@
     include_vars: 'firewall-secrets.yml'
     no_log: 'no'
 
-#  - name: Create static address group
+- name: Create static address group
     panos_address_group:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
