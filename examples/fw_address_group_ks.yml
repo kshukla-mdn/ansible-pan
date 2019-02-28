@@ -1,5 +1,5 @@
 ---
-- name: Add some address groups to the firewall
+ - name: Add some address groups to the firewall
   hosts: my-firewall
   connection: local
   gather_facts: false
