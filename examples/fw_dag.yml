@@ -13,7 +13,7 @@
     dag_match_filter: "'workday3' and 'box3'"
 
   tasks:
-  - name: Grab the credentials from ansible-vault
+   - name: Grab the credentials from ansible-vault
     include_vars: 'firewall-secrets.yml'
     no_log: 'yes'
 
