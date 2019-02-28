@@ -10,7 +10,7 @@
     no_log: 'yes'
   
   - name: Create static address group"
-     panos_address_group:
+     panos_address_group:{
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
@@ -21,6 +21,7 @@
        - Test-3.3.3.3
       tag:
        - Prod
+     }
   - name: Create dynamic address group
      panos_address_group:
       ip_address: '{{ ip_address }}'
