@@ -2,11 +2,11 @@
   hosts: my-firewall
   connection: local
   gather_facts: false
-  tasks: null
-- name: Grab the credentials from ansible-vault
-  include_vars: firewall-secrets.yml
-  no_log: 'yes'
-- name: Create static address group
+  tasks: 
+  - name: Grab the credentials from ansible-vault
+    include_vars: firewall-secrets.yml
+    no_log: 'yes'
+  - name: Create static address group
   panos_address_group:
     ip_address: '{{ ip_address }}'
     username: '{{ username }}'
@@ -18,14 +18,14 @@
       - Test-3.3.3.3
     tag:
       - Prod
-- name: Create dynamic address group
-  Panos_address_group:
-    ip_address: '{{ ip_address }}'
-    username: '{{ username }}'
-    password: '{{ password }}'
-    name: SI-Web-EPG
-    dynamic_value: SI-Web-EPG
-    tag:
+  - name: Create dynamic address group
+    Panos_address_group:
+     ip_address: '{{ ip_address }}'
+     username: '{{ username }}'
+     password: '{{ password }}'
+     name: SI-Web-EPG
+     dynamic_value: SI-Web-EPG
+     tag:
       - SI
 - name: Delete address group
   panos_address_group:
