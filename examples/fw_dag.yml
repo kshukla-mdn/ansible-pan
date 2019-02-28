@@ -14,8 +14,8 @@
 
   tasks:
    - name: Grab the credentials from ansible-vault
-    include_vars: 'firewall-secrets.yml'
-    no_log: 'yes'
+     include_vars: 'firewall-secrets.yml'
+     no_log: 'yes'
 
     - name: Create the tags to map IP addresses
       panos_dag_tags:
