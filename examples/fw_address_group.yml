@@ -18,8 +18,8 @@
       static_value: ['Test-1.1.1.1', 'Test-2.2.2.2', 'Test-3.3.3.3']
       tag: ['Prod']
 
-  - name: Create dynamic address group
-    panos_address_group:
+- name: Create dynamic address group
+  panos_address_group:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
@@ -27,8 +27,8 @@
       dynamic_value: 'SI-Web-EPG'
       tag: ['SI']
 
-  - name: Delete address group
-    panos_address_group:
+- name: Delete address group
+  panos_address_group:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
