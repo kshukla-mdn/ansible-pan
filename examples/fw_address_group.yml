@@ -1,5 +1,5 @@
 - name: Add some address groups to the firewall
-  - hosts: my-firewall
+     hosts: my-firewall
      connection: local
      gather_facts: false
      tasks:
@@ -7,7 +7,7 @@
       include_vars: firewall-secrets.yml
       no_log: 'yes'
 - name: Create static address group
-   panos_address_group:
+    panos_address_group:
     ip_address: '{{ ip_address }}'
     username: '{{ username }}'
     password: '{{ password }}'
@@ -19,7 +19,7 @@
     tag:
       - Prod
 - name: Create dynamic address group
-   panos_address_group:
+    Panos_address_group:
     ip_address: '{{ ip_address }}'
     username: '{{ username }}'
     password: '{{ password }}'
@@ -28,7 +28,7 @@
     tag:
       - SI
 - name: Delete address group
-   panos_address_group:
+    panos_address_group:
     ip_address: '{{ ip_address }}'
     username: '{{ username }}'
     password: '{{ password }}'
