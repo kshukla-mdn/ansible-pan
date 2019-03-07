@@ -52,6 +52,20 @@
       psk: 'CHANGEME'
       crypto_profile_name: 'IKE-vertex'
       commit: 'False'
+  
+  
+  - name: Create Tunnel Interface 'tunnel.5'
+    panos_tunnel:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      state: 'present'
+      if_name: tunnel.5
+      ip: 192.168.27.21/30
+      vr_name: default
+      zone_name: ipsec_tunnel
+      comment: IPSec connection to remote site
+      management_profile: allow-ping
 
   - name: Add IPSec tunnel to IKE gateway profile
     panos_ipsec_tunnel:
