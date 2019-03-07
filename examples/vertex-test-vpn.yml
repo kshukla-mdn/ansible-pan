@@ -63,7 +63,7 @@
       if_name: tunnel.5
       ip: 192.168.27.21/30
       vr_name: default
-      zone_name: ipsec_tunnel
+      zone_name: untrust
       comment: IPSec connection to remote site
       management_profile: allow-ping
 
