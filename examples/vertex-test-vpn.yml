@@ -74,7 +74,7 @@
       password: '{{ password }}'
       state: 'present'
       name: 'IPSecTunnel-vertex'
-      tunnel_interface: 'tunnel.2'
+      tunnel_interface: 'tunnel.5'
       ike_gtw_name: 'IKEGW-vertex'
       ipsec_profile: 'IPSec-vertex'
       commit: 'False'
