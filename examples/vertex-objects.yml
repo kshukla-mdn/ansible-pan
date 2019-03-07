@@ -1,0 +1,133 @@
+- name: Add some security rules to the firewall
+  hosts: my-firewall
+  connection: local
+  gather_facts: False
+
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
+
+  tasks:
+  - name: Grab the credentials from ansible-vault
+    include_vars: 'firewall-secrets.yml'
+    no_log: 'yes'
+
+  - name: Add an Host 1 address object to the firewall
+    panos_object:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      addressobject: 'host-10.160.24.224'
+      address: '10.160.24.224'
+      address_type: 'ip-netmask'
+      description: 'This is a vertex host 1 address object'
+      operation: 'add'
+ 
+ - name: Add an Host 2 address object to the firewall
+    panos_object:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      addressobject: 'host-10.118.45.98'
+      address: '10.118.45.98'
+      address_type: 'ip-netmask'
+      description: 'This is a vertex host 2 address object'
+      operation: 'add'
+   
+  - name: Add an address group to the firewall
+    panos_object:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      addressgroup: 'vertex-address-group'
+      static_value: ['host-10.160.24.224','host-10.118.45.98']
+      description: 'This is a vertex addressgroup'
+      operation: 'add'
+
+  - name: Add a Database proxy service to the firewall for Vertex
+    panos_object:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      serviceobject: 'service-4013'
+      protocol: 'tcp'
+      destination_port: '4013'
+      description: 'This is a RODB service object'
+      operation: 'add'
+
+  #- name: Add a service group to the firewall
+  #  panos_object:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      servicegroup: 'test-service-group'
+      services: ['service-abc','service-xyz']
+      description: 'This is a test servicegroup'
+      operation: 'add'
+
+  - name: Add a tag to the firewall
+    panos_object:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      tag_name: 'vertex'
+      color: 'orange'
+      description: 'This is vertex tag'
+      operation: 'add'
+
+  - name: Add SEC rule 1 to the firewall
+    panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'vertex incoming port'
+      description: 'Incoming traffic'
+      source_zone: ['untrust']
+      destination_zone: ['trust']
+      source_ip: ['vertex-address-group']
+      source_user: ['any']
+      destination_ip: ['172.20.14.10']
+      category: ['any']
+      application: ['any']
+      service: ['service-4013']
+      hip_profiles: ['any']
+      action: 'allow'
+
+  #- name: Add test rule 2 to the firewall
+  #  panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'Ansible test 2'
+      description: 'Another Ansible test rule'
+      source_zone: ['internal']
+      source_ip: ['range-192.168.100.100-200']
+      source_user: ['any']
+      hip_profiles: ['any']
+      destination_zone: ['external']
+      destination_ip: ['any']
+      category: ['any']
+      application: ['any']
+      service: ['service-abc']
+      action: 'allow'
+      group_profile: 'default'
+
+  #- name: Add test rule 3 to the firewall
+  #  panos_security_rule:
+      ip_address: '{{ ip_address }}'
+      username: '{{ username }}'
+      password: '{{ password }}'
+      operation: 'add'
+      rule_name: 'Ansible test 3'
+      description: 'Yet another Ansible test rule'
+      source_zone: ['internal']
+      source_ip: ['net-10.0.0.0-8']
+      source_user: ['any']
+      hip_profiles: ['any']
+      destination_zone: ['external']
+      destination_ip: ['any']
+      category: ['any']
+      application: ['any']
+      service: ['test-service-group']
+      action: 'allow'
