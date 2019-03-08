@@ -11,20 +11,13 @@
     include_vars: 'firewall-secrets.yml'
     no_log: 'yes'
 
-  - name: Create Tunnel Interface 'tunnel.1'
-    panos_tunnel:
-      ip_address: '{{ ip_address }}'
-      username: '{{ username }}'
-      password: '{{ password }}'
-      if_name: tunnel.1
-
-  - name: Create Tunnel Interface 'tunnel.2'
+  - name: Create Tunnel Interface 'tunnel.5'
     panos_tunnel:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       state: 'present'
-      if_name: tunnel.2
+      if_name: tunnel.5
       ip: 192.168.27.21/30
       vr_name: default
       zone_name: ipsec_tunnel
