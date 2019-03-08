@@ -22,7 +22,7 @@
       description: 'This is a vertex host 1 address object'
       operation: 'add'
  
- - name: Add an Host 2 address object to the firewall
+  - name: Add an Host 2 address object to the firewall
     panos_object:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
