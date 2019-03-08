@@ -3,7 +3,7 @@
   connection: local
   gather_facts: False
 
- roles:
+  roles:
    - role: PaloAltoNetworks.paloaltonetworks
 
   tasks:
