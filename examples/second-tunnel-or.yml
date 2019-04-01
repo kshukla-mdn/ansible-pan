@@ -17,12 +17,12 @@
       username: '{{ username }}'
       password: '{{ password }}'
       state: 'present'
-      name: 'IKE-vertex'
+      name: 'IKE-oregon'
       dhgroup: 'group14'
       authentication: 'sha256'
       encryption: ['aes-256-cbc', '3des']
       lifetime_sec: '28800'
-      commit: 'False'
+      commit: 'True'
 
   - name: Add IPSec crypto config to the firewall
     panos_ipsec_profile:
@@ -30,12 +30,12 @@
       username: '{{ username }}'
       password: '{{ password }}'
       state: 'present'
-      name: 'IPSec-vertex'
+      name: 'IPSec-oregon'
       encryption: ['aes-256-cbc', '3des']
       authentication: 'sha256'
-      dhgroup: 'group14'
+      dhgroup: 'group2'
       lifetime_hrs: '1'
-      commit: 'False'
+      commit: 'True'
 
   - name: Add IKE gateway config to the firewall
     panos_ike_gateway:
@@ -43,25 +43,26 @@
       username: '{{ username }}'
       password: '{{ password }}'
       state: 'present'
-      name: 'IKEGW-Vertex'
-      protocol_version: 'ikev2'
+      name: 'IKEGW-oregon'
+      protocol_version: 'ikev1'
       interface: 'ethernet1/3'
       pasive_mode: 'True'
       liveness_check: '5'
-      peer_ip_value: '192.80.70.8'
-      psk: 'CHANGEME'
-      crypto_profile_name: 'IKE-vertex'
-      commit: 'False'
+      peer_ip_value: '34.212.247.34'
+      psk: 'tCSbv34u4CB3Bp0LXdh7EzhePxmo6tHw'
+      crypto_profile_name: 'IKE-oregon'
+      exchange_mode: 'main'
+      commit: 'True'
   
   
-  - name: Create Tunnel Interface 'tunnel.5'
+  - name: Create Tunnel Interface 'tunnel.6'
     panos_tunnel:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       state: 'present'
-      if_name: tunnel.5
-      ip: 192.168.27.21/30
+      if_name: tunnel.6
+      ip: 169.254.15.206/30
       vr_name: default
       zone_name: untrust
       comment: IPSec connection to remote site
@@ -73,8 +74,8 @@
       username: '{{ username }}'
       password: '{{ password }}'
       state: 'present'
-      name: 'IPSecTunnel-vertex'
-      tunnel_interface: 'tunnel.5'
-      ike_gtw_name: 'IKEGW-vertex'
-      ipsec_profile: 'IPSec-vertex'
+      name: 'IPSecTunnel-oregon'
+      tunnel_interface: 'tunnel.6'
+      ike_gtw_name: 'IKEGW-oregon'
+      ipsec_profile: 'IPSec-oregon'
       commit: 'False'
