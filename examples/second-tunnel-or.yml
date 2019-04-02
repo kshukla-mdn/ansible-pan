@@ -57,13 +57,13 @@
       dead_peer_detection_retry: '3'
       commit: 'True'
     
-  - name: Create Tunnel Interface 'tunnel.6'
+  - name: Create Tunnel Interface tunnel4
     panos_tunnel:
       ip_address: '{{ ip_address }}'
       username: '{{ username }}'
       password: '{{ password }}'
       state: 'present'
-      if_name: 'tunnel.6'
+      if_name: 'tunnel.4'
       ip: ["169.254.15.206/30"]
       vr_name: "default"
       zone_name: "untrust"
