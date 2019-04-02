@@ -1,10 +1,11 @@
 - name: This is composite script that creates VPN IPSec profile and tunnel on NGFW
   hosts: my-firewall
+  roles:
+   - role: PaloAltoNetworks.paloaltonetworks
   connection: local
   gather_facts: False
 
-  roles:
-   - role: PaloAltoNetworks.paloaltonetworks
+  
 
   tasks:
   - name: Grab the credentials from ansible-vault
